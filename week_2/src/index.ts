@@ -1,14 +1,12 @@
-import express from "express"
-import cors from "cors"
-import dotenv from "dotenv"
-dotenv.config();
-const PORT=process.env.PORT||4000;
-const app=express();
+import http from "http";
+import { routeHandler } from "./route/fileRoute";
 
-app.get("/",(req,res)=>{
-    res.end("Hello world")
-})
+const PORT = 3000;
 
-app.listen(PORT,()=>{
-    console.log(`Server is listening at ${PORT}`);
-})
+const server = http.createServer((req, res) => {
+  routeHandler(req, res);
+});
+
+server.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
